@@ -6,20 +6,42 @@
       <p>60%</p>
     </div>
     <div class="iconBackHome">
-      <ion-icon name="chevron-forward"></ion-icon>
+      <ion-icon (click)="closeModal()" name="chevron-forward"></ion-icon>
     </div>
     <div class="status">
       <p>Activated</p>
     </div>
   </div>
 </ion-header>
-<ion-content class="ion-no-border">
 
+<ion-content class="ion-content ion-no-border">
+  <p>Settings</p>
+  <div class="containerContent">
+    <div class="batteryAlarm">
+      bat
+    </div>
+    <div class="RingtoneSong">
+      ring
+    </div>
+    <div class="disturbing">
+      dist
+    </div>
+    <div class="enableAlarm">
+      alar
+    </div>
+    <div class="darkMode">
+      dark
+    </div>
+    <div class="language">
+      lan
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer class="ion-footer ion-no-border">
-  <!--<ion-button (click)="closeModal()">Close Modal</ion-button>-->
-  <span>Save Changes</span> <ion-icon name="checkmark-circle"></ion-icon>
+  <div class="buttonSave">
+    <span>Save Changes</span> <ion-icon name="checkmark-circle"></ion-icon>
+  </div>
 </ion-footer>
 
 
