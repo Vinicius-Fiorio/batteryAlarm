@@ -1,0 +1,7 @@
+{
+  "name": "Alert Battery App",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

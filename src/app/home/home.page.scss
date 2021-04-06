@@ -1,0 +1,102 @@
+body{
+  background: #FFFFFF;
+  font-family: 'Rubik', sans-serif;
+}
+.container{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20fr 40vh 20vh 20vh;
+  gap: 10px;
+  grid-template-areas: 
+  "h"
+  "main"
+  "buttons"
+  "f";
+  justify-items: center;
+  align-items: center;
+}
+
+header{
+  grid-area: h;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #070417;
+  
+}
+
+main{
+  grid-area: main;
+  width: 100vw;
+  height: 40vh;
+}
+
+.option-button-container{
+  margin-top: 5rem;
+  grid-area: buttons;
+  width: 60vw;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(2,1fr);
+  grid-template-areas: 
+  "botao1 botao2"
+  "sub1 sub2";
+  justify-items: center;
+  align-items: center;
+}
+
+
+ion-button{
+  width: 3.5rem;
+  height: 3.5rem;
+  --border-radius: 50%;
+  --background: rgba(189, 189, 189, 0.5);
+
+  ion-icon{
+    color: #BDBDBD;
+    font-size: 32px;
+  }
+}
+
+.option-button-1{
+  grid-area: botao1;
+}
+
+.option-button-2{
+  grid-area: botao2;
+}
+
+.option-button-subtitle-1{
+  grid-area: sub1;
+  color: #8c8c8c;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.option-button-subtitle-2{
+  grid-area: sub2;
+  color: #8c8c8c;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+footer{
+  grid-area: f;
+  margin-top: 5rem;
+  color: #514F5D;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 32px;
+  a{
+    color: #7012CF;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 32px;
+    text-decoration: none;
+  }
+}
