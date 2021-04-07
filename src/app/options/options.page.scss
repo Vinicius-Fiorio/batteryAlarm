@@ -55,19 +55,70 @@ ion-header > p{
 }
 
 ion-content{
-    --background: red;
+    --background: #FAFAFF;
     .containerContent{
         height: 100%;
         width: 90vw;
         margin: 0 auto;
-        background: #FFFFFF ;
+        background: #FAFAFF ;
 
         >div{
-            background: blue;
+            background: #FFFFFF;
             margin-top: 2vh;
             height: 11.8vh;
             border-radius: 10px;
             display: grid;
+        }
+
+        .batteryAlarm{
+            grid-template-columns: 1fr 3fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+            "iconn title title title"
+            "iconn value value value";
+
+            .icon{
+                grid-area: iconn;
+                background: #9B51E0;
+                justify-self: center;
+                align-self: center;
+                border-radius: 50%;
+                width: 15vw;  
+                height : 15vw; 
+                display: grid;
+                grid-template-columns: 1fr;
+                justify-items: center;
+                align-items: center;
+
+                .avatar ion-icon{
+                    margin-top: 0.5vh;
+                    font-size: 32px;
+                }
+            }
+
+            .title{
+                grid-area: title;
+                align-self: center;
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 20px;
+                color: black;
+                margin-top: 2vh;
+            }
+
+            .valueOption{
+                grid-area: value;
+                margin-top: 0.8vh;
+                width: 12vw;
+                background: #F2F2F2;
+                padding: 0.5vh 1vw 0.5vh 2vw;
+                border-radius: 5px;
+                align-self: start;
+                color: #828282;
+                font-size: 0.9rem;
+                font-weight: normal;
+                text-align: center;
+            }
         }
     }
 
@@ -81,6 +132,7 @@ ion-content{
         color: #070417;
     }
 }
+
 
 ion-footer{
     background: #FAFAFF;
