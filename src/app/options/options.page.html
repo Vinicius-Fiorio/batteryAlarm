@@ -1,9 +1,8 @@
-
 <ion-header class="ion-header ion-no-border">
   <p>Battery</p>
   <div class="containerHeader">
     <div class="percent">
-      <p>60%</p>
+      <p>{{battery}}%</p>
     </div>
     <div class="iconBackHome">
       <ion-icon (click)="closeModal()" name="chevron-forward"></ion-icon>
@@ -17,10 +16,14 @@
 <ion-content class="ion-content ion-no-border">
   <p>Settings</p>
   <div class="containerContent">
+
     <div class="batteryAlarm" (click)="presentAlertPrompt()">
       <div class="icon">
         <div class="avatar">
-          <ion-icon name="battery-half"></ion-icon>
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.67 17C19.4 17 20 16.4 20 15.67V14H22V10H20V8.33C20 7.6 19.4 7 18.67 7H15V17H18.67Z" fill="white" fill-opacity="0.26"/>
+              <path d="M15 7L3.33 7C2.6 7 2 7.6 2 8.33V15.66C2 16.4 2.6 17 3.33 17H15V7Z" fill="white"/>
+            </svg>
         </div>
       </div>
       <div class="title">
@@ -31,9 +34,21 @@
       </div>
 
     </div>
+
     <div class="RingtoneSong">
-      ring
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="musical-notes"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Ringtone Song</span>
+      </div>
+      <div class="valueOption">
+        <p>Tubarão ft Kant - Nada Pacifico</p>
+      </div>
     </div>
+
     <div class="disturbing">
       dist
     </div>
@@ -51,9 +66,7 @@
 
 <ion-footer class="ion-footer ion-no-border">
   <div class="buttonSave">
-    <span>Save Changes</span> <ion-icon name="checkmark-circle"></ion-icon>
+    <span>Save Changes</span>
+    <ion-icon name="checkmark-circle"></ion-icon>
   </div>
 </ion-footer>
-
-
-

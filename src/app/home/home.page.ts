@@ -5,6 +5,8 @@ import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,28 +14,16 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
   providers: [BatteryStatus]
 })
 export class HomePage {
-  battery = {
-    level: 95,
-    isPlugged: false
-  };
   
-  constructor(public modalController: ModalController, private batteryStatus: BatteryStatus) {
-    
-    this.getStatus()
-  }
-  
-
-  atual = 95;
-
-
-  getStatus(){
-    this.batteryStatus.onChange().subscribe(status => {
-      this.battery = status;
+  batterylevel:any = 0;
+  constructor(public modalController: ModalController, public batteryStatus: BatteryStatus) {
+    this.batteryStatus.onChange().subscribe((status) =>{
+      this.batterylevel = status.level;
     });
   }
 
-  formatTitle = () => `${this.battery.level}%`;
-  verifica = this.atual<=90
+  formatTitle = () => `${this.batterylevel}%`;
+  verifica = this.batterylevel<=90
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -41,7 +31,7 @@ export class HomePage {
       cssClass: 'my-custom-class',
       componentProps: {
         'status': 'active',
-        'battery': this.atual
+        'battery': this.batterylevel
       },
       swipeToClose: true
     });
