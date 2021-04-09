@@ -32,7 +32,6 @@
       <div class="valueOption">
         <p>50%</p>
       </div>
-
     </div>
 
     <div class="RingtoneSong">
@@ -50,17 +49,71 @@
     </div>
 
     <div class="disturbing">
-      dist
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="notifications-off"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Do not Disturbing</span>
+        <div class="toggle">
+          <ion-toggle [(ngModel)]="options.notDisturbing.active" (ionChange)="test()"></ion-toggle>
+        </div>
+      </div>
+      <div class="valueOption">
+        <p>22:00 - 08:00</p>
+      </div>
     </div>
+
     <div class="enableAlarm">
-      alar
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="hardware-chip"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Enable/Disable alarm with</span>
+      </div>
+      <div class="valueOption">
+        <div class="border">
+          <span>Plug-in</span>
+          <span>Manual</span>
+        </div>
+      </div>
     </div>
+
     <div class="darkMode">
-      dark
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="moon"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Dark Mode</span>
+        <div class="toggle">
+          <ion-toggle [(ngModel)]="options.darkMode.active" (ionChange)="test()"></ion-toggle>
+        </div>
+      </div>
+      <div class="valueOption">
+        <p>Manual</p>
+      </div>
     </div>
+
     <div class="language">
-      lan
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="language"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Language</span>
+      </div>
+      <div class="valueOption">
+        <p>English</p>
+      </div>
     </div>
+    <br>
+
   </div>
 </ion-content>
 

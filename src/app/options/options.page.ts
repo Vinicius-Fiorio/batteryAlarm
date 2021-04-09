@@ -17,26 +17,29 @@ export class OptionsPage implements OnInit {
   options = {
     batteryLevelAlarm: 100,
     ringtoneSong: 'music',
+
     notDisturbing: {
       active: true,
       start: '22:00',
       end: '8:00'
     },
+
     alarmMethod:{
       enableMethod: 'Plug-in',
       disableMethod: 'Manual'
     },
+
     darkMode:{
       active: false,
       method:  'Manual'
     },
-    language: 'Portugues'
+    language: 'English'
   }
 
   ngOnInit() {
     let battery = {
       status: this.status,
-      battery: this.battery
+      batteryLevel: this.battery
     }
     console.log(battery)
   }
@@ -47,6 +50,9 @@ export class OptionsPage implements OnInit {
     })
   }
 
+  test(){
+    console.log(this.options.notDisturbing.active, this.options.darkMode.active);
+  }
 
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
