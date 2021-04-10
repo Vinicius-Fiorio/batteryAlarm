@@ -5,14 +5,16 @@ import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
-  styleUrls: ['./options.page.scss'],
+  styleUrls: ['./options.page.scss']
 })
 export class OptionsPage implements OnInit {
 
   @Input() status: string;
   @Input() battery: number;
 
-  constructor(public modalController: ModalController, public alertController: AlertController) { }
+  batterylevel:any;
+
+  constructor(public modalController: ModalController, public alertController: AlertController) {}
 
   options = {
     batteryLevelAlarm: 100,

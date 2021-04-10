@@ -16,12 +16,12 @@
 
     <div class="option-button-container">
       <div class="option-button-1">
-        <ion-button *ngIf="verifica; else pause">
+        <ion-button *ngIf="!activeAlarm; else pause" (click)="changeActivationAlarm()">
           <ion-icon slot="icon-only" name="play"></ion-icon>
         </ion-button>
 
         <ng-template #pause>
-          <ion-button>
+          <ion-button (click)="changeActivationAlarm()">
             <ion-icon name="pause"></ion-icon>
           </ion-button>
         </ng-template>
@@ -33,7 +33,7 @@
         </ion-button>
       </div>
 
-      <div *ngIf="verifica; else pauseText" class="option-button-subtitle-1">
+      <div *ngIf="!activeAlarm; else pauseText" class="option-button-subtitle-1">
         <p>Turn On</p>
       </div>
 

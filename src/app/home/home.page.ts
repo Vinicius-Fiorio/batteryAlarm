@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
@@ -16,21 +16,31 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 export class HomePage {
   
   batterylevel:any = 0;
+  batteryIsPlugged:any;
+  activeAlarm: boolean = false;
+
   constructor(public modalController: ModalController, public batteryStatus: BatteryStatus) {
     this.batteryStatus.onChange().subscribe((status) =>{
       this.batterylevel = status.level;
+      this.batteryIsPlugged = status.isPlugged;
     });
   }
 
+  changeActivationAlarm(){
+
+    this.activeAlarm = !this.activeAlarm;
+    console.log(this.activeAlarm);
+  }
+
   formatTitle = () => `${this.batterylevel}%`;
-  verifica = this.batterylevel<=90
+  
 
   async presentModal() {
     const modal = await this.modalController.create({
       component: OptionsPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'status': 'active',
+        'status': this.batteryIsPlugged,
         'battery': this.batterylevel
       },
       swipeToClose: true
