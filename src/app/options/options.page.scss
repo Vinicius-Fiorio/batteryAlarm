@@ -9,6 +9,20 @@
     background: #FAFAFF;
 }
 
+ion-select{
+    position: absolute;
+    background: none;
+    width: 65vw;
+    height: 10.5vh;
+    margin-top: -2vh;
+}
+ion-select::part(icon) {
+    opacity: 0;
+}
+ion-select::part(text) {
+    opacity: 0;
+}
+
 ion-toggle{
     --background: #979797;
     --background-checked: #07E092;

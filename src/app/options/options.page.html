@@ -16,8 +16,7 @@
 <ion-content class="ion-content ion-no-border">
   <p>Settings</p>
   <div class="containerContent">
-
-    <div class="batteryAlarm" (click)="presentAlertPrompt()">
+    <div class="batteryAlarm">
       <div class="icon">
         <div class="avatar">
             <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,10 +26,13 @@
         </div>
       </div>
       <div class="title">
+        <ion-select [(ngModel)]="options.batteryLevelAlarm" mode="ios">
+          <ion-select-option *ngFor="let percent of percents" [value]="percent">{{percent}}</ion-select-option>
+        </ion-select>
         <span>Battery Level Alarm</span>
       </div>
       <div class="valueOption">
-        <span>100%</span>
+        <span>{{options.batteryLevelAlarm}}%</span>
       </div>
     </div>
 
@@ -57,7 +59,7 @@
       <div class="title">
         <span>Do not Disturbing</span>
         <div class="toggle">
-          <ion-toggle [(ngModel)]="options.notDisturbing.active" (ionChange)="test()"></ion-toggle>
+          <ion-toggle [(ngModel)]="options.notDisturbing.active"></ion-toggle>
         </div>
       </div>
       <div class="valueOption">
@@ -91,7 +93,7 @@
       <div class="title">
         <span>Dark Mode</span>
         <div class="toggle">
-          <ion-toggle [(ngModel)]="options.darkMode.active" (ionChange)="test()"></ion-toggle>
+          <ion-toggle [(ngModel)]="options.darkMode.active"></ion-toggle>
         </div>
       </div>
       <div class="valueOption">

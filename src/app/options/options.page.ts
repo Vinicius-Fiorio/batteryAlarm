@@ -13,8 +13,15 @@ export class OptionsPage implements OnInit {
   @Input() battery: number;
 
   batterylevel:any;
+  percents=[];
 
-  constructor(public modalController: ModalController, public alertController: AlertController) {}
+  constructor(public modalController: ModalController, public alertController: AlertController) {
+
+    //initialize array percents
+    for(let x = 1; x<100;x++){
+      this.percents.push(x);
+    };
+  }
 
   options = {
     batteryLevelAlarm: 100,
@@ -38,6 +45,7 @@ export class OptionsPage implements OnInit {
     language: 'English'
   }
 
+
   ngOnInit() {
     let battery = {
       status: this.status,
@@ -52,46 +60,4 @@ export class OptionsPage implements OnInit {
     })
   }
 
-  test(){
-    console.log(this.options.notDisturbing.active, this.options.darkMode.active);
-  }
-
-  async presentAlertPrompt() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class-alert',
-      header: 'Battery level alarm',
-      subHeader: 'Enter battery level to sound the alarm',
-      message: '0 to 100',
-      mode: 'ios',
-      inputs: [
-        {
-          id: 'batteryLevel',
-          name: 'Level',
-          type: 'number',
-          min: 1,
-          max: 100,
-          placeholder: '98',      
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary'
-        }, {
-          text: 'Ok',
-          handler: (data) => {
-            if(data.Level > 100)
-              data.Level = 100
-
-            this.options.batteryLevelAlarm = parseInt(data.Level);
-            console.log('Confirm Ok',this.options.batteryLevelAlarm);
-          }
-        }
-      ]
-    });
-    
-
-    await alert.present();
-  }
 }
