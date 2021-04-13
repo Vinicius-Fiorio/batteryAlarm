@@ -14,6 +14,7 @@ export class OptionsPage implements OnInit {
 
   batterylevel:any;
   percents=[];
+  methodValue:number
 
   constructor(public modalController: ModalController, public alertController: AlertController) {
 
@@ -21,6 +22,28 @@ export class OptionsPage implements OnInit {
     for(let x = 1; x<100;x++){
       this.percents.push(x);
     };
+
+  }
+
+  changeMethodAlarm(){
+    switch(this.methodValue){
+      case 1:
+        this.options.alarmMethod.enableMethod = 'Manual'
+        this.options.alarmMethod.disableMethod = 'Manual'
+        break;
+      case 2:
+        this.options.alarmMethod.enableMethod = 'Manual'
+        this.options.alarmMethod.disableMethod = 'Plug-in'
+        break;
+      case 3:
+        this.options.alarmMethod.enableMethod = 'Plug-in'
+        this.options.alarmMethod.disableMethod = 'Manual'
+        break;
+      case 4:
+        this.options.alarmMethod.enableMethod = 'Plug-in'
+        this.options.alarmMethod.disableMethod = 'Plug-in'
+        break;
+    }
   }
 
   options = {

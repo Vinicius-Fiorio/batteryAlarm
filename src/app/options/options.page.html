@@ -74,12 +74,18 @@
         </div>
       </div>
       <div class="title">
+        <ion-select [(ngModel)]="methodValue" mode="ios" (ngModelChange)="changeMethodAlarm()">
+          <ion-select-option [value]="1"> Manual / Manual</ion-select-option>
+          <ion-select-option [value]="2"> Manual / Plugin</ion-select-option>
+          <ion-select-option [value]="3"> Plugin / Manual</ion-select-option>
+          <ion-select-option [value]="4"> Plugin / Plugin</ion-select-option>
+        </ion-select>
         <span>Enable/Disable alarm with</span>
       </div>
       <div class="valueOption">
         <div class="border">
-          <span>Plug-in</span>
-          <span>Manual</span>
+          <span>{{options.alarmMethod.enableMethod}}</span>
+          <span>{{options.alarmMethod.disableMethod}}</span>
         </div>
       </div>
     </div>
