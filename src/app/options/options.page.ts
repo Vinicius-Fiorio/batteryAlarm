@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
+import { BatteryStatus } from '@ionic-native/battery-status/ngx';
+
+
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
@@ -9,19 +12,24 @@ import { AlertController } from '@ionic/angular';
 })
 export class OptionsPage implements OnInit {
 
-  @Input() status: string;
+  @Input() status: boolean;
   @Input() battery: number;
 
-  batterylevel:any;
   percents=[];
   methodValue:number
 
-  constructor(public modalController: ModalController, public alertController: AlertController) {
+  constructor(public modalController: ModalController, public alertController: AlertController, public batteryStatus: BatteryStatus) {
+
+    this.batteryStatus.onChange().subscribe((status) =>{
+      this.battery = status.level;
+      this.status = status.isPlugged;
+    });
 
     //initialize array percents
-    for(let x = 1; x<100;x++){
+    for(let x = 1; x<=100;x++){
       this.percents.push(x);
     };
+
 
   }
 
@@ -70,11 +78,7 @@ export class OptionsPage implements OnInit {
 
 
   ngOnInit() {
-    let battery = {
-      status: this.status,
-      batteryLevel: this.battery
-    }
-    console.log(battery)
+
   }
 
   public closeModal(){

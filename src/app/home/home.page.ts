@@ -15,7 +15,7 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 })
 export class HomePage {
   
-  batterylevel:any = 0;
+  batterylevel:any;
   batteryIsPlugged:any;
   activeAlarm: boolean = false;
 
@@ -50,6 +50,12 @@ export class HomePage {
   
   public openModal(){
     this.modalController.create
+  }
+
+  public closeModal(){
+    this.modalController.dismiss({
+      'dismissed': true
+    })
   }
 
 }

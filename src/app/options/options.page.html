@@ -8,7 +8,7 @@
       <ion-icon (click)="closeModal()" name="chevron-forward"></ion-icon>
     </div>
     <div class="status">
-      <p>Activated</p>
+      <p>{{status === true ? 'Plugged' : 'Not Plugged'}}</p>
     </div>
   </div>
 </ion-header>
