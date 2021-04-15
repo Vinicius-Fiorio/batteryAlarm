@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="RingtoneSong">
+    <div class="RingtoneSong" (click)="pickFileAlarm()">
       <div class="icon">
         <div class="avatar">
           <ion-icon name="musical-notes"></ion-icon>
@@ -46,7 +46,7 @@
         <span>Ringtone Song</span>
       </div>
       <div class="valueOption">
-        <span>Tubarão ft Kant - Nada Pacifico</span>
+        <span>{{options.ringtoneSong.name}}</span>
       </div>
     </div>
 

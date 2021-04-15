@@ -5,6 +5,11 @@ import { AlertController } from '@ionic/angular';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 
+
+import { File } from '@ionic-native/file/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
@@ -16,9 +21,16 @@ export class OptionsPage implements OnInit {
   @Input() battery: number;
 
   percents=[];
-  methodValue:number
+  methodValue:number;
+  teste:any;
 
-  constructor(public modalController: ModalController, public alertController: AlertController, public batteryStatus: BatteryStatus) {
+  constructor(public modalController: ModalController, 
+    public alertController: AlertController, 
+    public batteryStatus: BatteryStatus,
+    public file: File,
+    private fileChooser: FileChooser,
+    private filePath: FilePath
+    ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
       this.battery = status.level;
@@ -31,6 +43,46 @@ export class OptionsPage implements OnInit {
     };
 
 
+  }
+
+  options = {
+    batteryLevelAlarm: 100,
+    ringtoneSong: {
+      name: 'Default Ringtone',
+      type: 'mp3/audio',
+      path: 'aa/b/c.mp3'
+    },
+
+    notDisturbing: {
+      active: true,
+      start: '22:00',
+      end: '8:00'
+    },
+
+    alarmMethod:{
+      enableMethod: 'Plug-in',
+      disableMethod: 'Manual'
+    },
+
+    darkMode:{
+      active: false,
+      method:  'Manual'
+    },
+    language: 'English'
+  }
+
+  pickFileAlarm(){
+    this.fileChooser.open()
+      .then(uri => {
+        this.filePath.resolveNativePath(uri).then(nativePath =>{
+          let filename = nativePath.substring(nativePath.lastIndexOf('/')+1);
+          this.options.ringtoneSong.name = filename;
+          this.options.ringtoneSong.path = nativePath;
+          this.options.ringtoneSong.type = filename.substring(filename.lastIndexOf(".")+1);
+          
+        })
+      })
+      .catch(e => console.log(e));
   }
 
   changeMethodAlarm(){
@@ -54,27 +106,6 @@ export class OptionsPage implements OnInit {
     }
   }
 
-  options = {
-    batteryLevelAlarm: 100,
-    ringtoneSong: 'music',
-
-    notDisturbing: {
-      active: true,
-      start: '22:00',
-      end: '8:00'
-    },
-
-    alarmMethod:{
-      enableMethod: 'Plug-in',
-      disableMethod: 'Manual'
-    },
-
-    darkMode:{
-      active: false,
-      method:  'Manual'
-    },
-    language: 'English'
-  }
 
 
   ngOnInit() {
