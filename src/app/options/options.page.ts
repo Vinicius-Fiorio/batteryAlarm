@@ -27,7 +27,6 @@ export class OptionsPage implements OnInit {
   constructor(public modalController: ModalController, 
     public alertController: AlertController, 
     public batteryStatus: BatteryStatus,
-    public file: File,
     private fileChooser: FileChooser,
     private filePath: FilePath
     ) {
@@ -41,15 +40,12 @@ export class OptionsPage implements OnInit {
     for(let x = 1; x<=100;x++){
       this.percents.push(x);
     };
-
-
   }
 
   options = {
     batteryLevelAlarm: 100,
     ringtoneSong: {
       name: 'Default Ringtone',
-      type: 'mp3/audio',
       path: 'aa/b/c.mp3'
     },
 
@@ -72,17 +68,24 @@ export class OptionsPage implements OnInit {
   }
 
   pickFileAlarm(){
-    this.fileChooser.open()
+
+    let filter={ "mime": "audio/*" } // filter to select only audio files
+    this.fileChooser.open(filter)
       .then(uri => {
         this.filePath.resolveNativePath(uri).then(nativePath =>{
           let filename = nativePath.substring(nativePath.lastIndexOf('/')+1);
-          this.options.ringtoneSong.name = filename;
+          if(filename.length > 35){
+            let sub = filename.substring(0,35);
+            this.options.ringtoneSong.name = sub.concat(' ...');
+          }else{
+            this.options.ringtoneSong.name = filename;
+          }
           this.options.ringtoneSong.path = nativePath;
-          this.options.ringtoneSong.type = filename.substring(filename.lastIndexOf(".")+1);
-          
         })
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        this.teste = e;
+      });
   }
 
   changeMethodAlarm(){

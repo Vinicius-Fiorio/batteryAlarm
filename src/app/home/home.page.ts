@@ -15,21 +15,26 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 })
 export class HomePage {
   
-  batterylevel:any;
+  batterylevel:number;
   batteryIsPlugged:any;
   activeAlarm: boolean = false;
 
   constructor(public modalController: ModalController, public batteryStatus: BatteryStatus) {
+
     this.batteryStatus.onChange().subscribe((status) =>{
       this.batterylevel = status.level;
       this.batteryIsPlugged = status.isPlugged;
     });
   }
 
-  changeActivationAlarm(){
+  ionViewDidEnter(){
+    const batterysubscription = this.batteryStatus.onChange().subscribe(status => {  
+      this.batterylevel = status.level;
+    });
+  }
 
+  changeActivationAlarm(){
     this.activeAlarm = !this.activeAlarm;
-    console.log(this.activeAlarm);
   }
 
   formatTitle = () => `${this.batterylevel}%`;
