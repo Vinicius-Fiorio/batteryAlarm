@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'options',
     loadChildren: () => import('./options/options.module').then( m => m.OptionsPageModule)
   },
+  {
+    path: 'date-time',
+    loadChildren: () => import('./date-time/date-time.module').then( m => m.DateTimePageModule)
+  },
 ];
 
 @NgModule({
