@@ -99,6 +99,9 @@ export class OptionsPage{
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
+
+    this.options.notDisturbing.start = data.start
+    this.options.notDisturbing.end = data.end
     console.log(data);
   }
 

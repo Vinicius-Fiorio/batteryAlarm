@@ -1,9 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dateTime</ion-title>
-  </ion-toolbar>
+<ion-header (click)="closeModal()">
+  <div class="header">
+    <span>Set Time</span>
+  </div>
 </ion-header>
 
-<ion-content (click)="closeModal()">
+<ion-content fullscreen>
+  <div class="container">
+    <ion-datetime [(ngModel)]="startTime" display-format="hh:mm A" picker-format="h:mm A"></ion-datetime>
 
+    <ion-datetime [(ngModel)]="endTime" display-format="hh:mm A" picker-format="h:mm A"></ion-datetime>
+  </div>
 </ion-content>

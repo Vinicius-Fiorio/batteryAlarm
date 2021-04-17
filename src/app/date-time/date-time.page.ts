@@ -8,11 +8,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class DateTimePage {
 
+  startTime = "14:43";
+  endTime = "19:43";
+
   constructor(public modalController: ModalController) { }
 
   public closeModal(){
     this.modalController.dismiss({
-    	'date': true
+    	'start': this.startTime,
+      'end': this.endTime
     })
   }
 

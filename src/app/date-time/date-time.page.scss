@@ -1,0 +1,36 @@
+*{
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    --background: #FAFAFF;
+    color: #070417;
+}
+
+ion-header{
+    background: #FAFAFF;
+    
+    .header{
+        background: #9B51E0;
+        height: 11vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+        
+        span{
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 20px;
+            padding-right: 2vw;
+            color: #FFFFFF;
+        }
+    }
+}
+
+ion-content{
+    .container{
+        width: 70vw;
+        margin: 0 auto;
+        background: green;
+    }
+}
