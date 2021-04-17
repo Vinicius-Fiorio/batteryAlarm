@@ -5,17 +5,16 @@ import { AlertController } from '@ionic/angular';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 
-
-import { File } from '@ionic-native/file/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { DateTimePage } from '../date-time/date-time.page';
 
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
   styleUrls: ['./options.page.scss']
 })
-export class OptionsPage implements OnInit {
+export class OptionsPage{
 
   @Input() status: boolean;
   @Input() battery: number;
@@ -50,7 +49,7 @@ export class OptionsPage implements OnInit {
     },
 
     notDisturbing: {
-      active: true,
+      active: false,
       start: '22:00',
       end: '8:00'
     },
@@ -67,6 +66,7 @@ export class OptionsPage implements OnInit {
     language: 'English'
   }
 
+  //Ringtone Song
   pickFileAlarm(){
 
     let filter={ "mime": "audio/*" } // filter to select only audio files
@@ -88,6 +88,21 @@ export class OptionsPage implements OnInit {
       });
   }
 
+  //Date Time chooser
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: DateTimePage,
+      cssClass: 'my-custom-class',
+      swipeToClose: true
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+  }
+
+  // Alarm Method
   changeMethodAlarm(){
     switch(this.methodValue){
       case 1:
@@ -109,15 +124,9 @@ export class OptionsPage implements OnInit {
     }
   }
 
-
-
-  ngOnInit() {
-
-  }
-
   public closeModal(){
     this.modalController.dismiss({
-      'dismissed': true
+    	'options': this.options
     })
   }
 

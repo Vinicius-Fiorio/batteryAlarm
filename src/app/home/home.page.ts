@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
-
-
 
 @Component({
   selector: 'app-home',
@@ -13,6 +11,7 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
   styleUrls: ['home.page.scss'],
   providers: [BatteryStatus]
 })
+
 export class HomePage {
   
   batterylevel:number;
@@ -50,17 +49,11 @@ export class HomePage {
       },
       swipeToClose: true
     });
-    return await modal.present();
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
   }
   
-  public openModal(){
-    this.modalController.create
-  }
-
-  public closeModal(){
-    this.modalController.dismiss({
-      'dismissed': true
-    })
-  }
-
 }
