@@ -103,7 +103,7 @@
       <div class="title">
         <span>Dark Mode</span>
         <div class="toggle">
-          <ion-toggle [(ngModel)]="options.darkMode.active"></ion-toggle>
+          <ion-toggle [(ngModel)]="options.darkMode"></ion-toggle>
         </div>
       </div>
       <div class="valueOption">
@@ -133,7 +133,7 @@
   </div>
 </ion-content>
 
-<ion-footer class="ion-footer ion-no-border">
+<ion-footer class="ion-footer ion-no-border" (click)="insertData(options)">
   <div class="buttonSave">
     <span>Save Changes</span>
     <ion-icon name="checkmark-circle"></ion-icon>

@@ -9,6 +9,9 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { DateTimePage } from '../date-time/date-time.page';
 
+import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
@@ -27,7 +30,9 @@ export class OptionsPage{
     public alertController: AlertController, 
     public batteryStatus: BatteryStatus,
     private fileChooser: FileChooser,
-    private filePath: FilePath
+    private filePath: FilePath,
+    public loadingController: LoadingController,
+    public toastController: ToastController
     ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
@@ -45,7 +50,7 @@ export class OptionsPage{
     batteryLevelAlarm: 100,
     ringtoneSong: {
       name: 'Default Ringtone',
-      path: 'aa/b/c.mp3'
+      path: '../../assets/batery_full_capacity.mp3'
     },
 
     notDisturbing: {
@@ -59,12 +64,16 @@ export class OptionsPage{
       disableMethod: 'Manual'
     },
 
-    darkMode:{
-      active: false,
-      method:  'Manual'
-    },
+    darkMode: false,
     language: 'English'
   }
+
+  ngOnInit(){
+    if (localStorage.getItem('options') !== null) {
+      this.options = JSON.parse(localStorage.getItem('options'));
+    }
+  }
+
 
   //Ringtone Song
   pickFileAlarm(){
@@ -126,6 +135,54 @@ export class OptionsPage{
         this.options.alarmMethod.disableMethod = 'Plug-in'
         break;
     }
+  }
+
+  //insert Data Local Storage
+  public insertData(options:any){
+    let message:string;
+    let color:string;
+
+    this.presentLoading();
+
+    try{
+      localStorage.setItem('options', JSON.stringify(options));
+      message = 'Your settings have been saved';
+      color = 'success';
+
+    }catch(error){
+      message = `Error: ${error.message}`;
+      color = 'danger';
+
+    }finally{
+      setTimeout(() => {
+        this.presentToast(message,color);
+      }, 1500);
+      
+    }
+  }
+
+  //Loading controller
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      spinner: 'crescent',
+      mode: 'ios',
+      message: 'Please wait...',
+      duration: 1000
+    });
+    await loading.present();
+
+  }
+
+  //Toast controller
+  async presentToast(message:string, color:string) {
+    const toast = await this.toastController.create({
+      message: message,
+      position: 'top',
+      color: color,
+      duration: 2000
+    });
+    toast.present();
   }
 
   public closeModal(){
