@@ -210,6 +210,23 @@ ion-content{
                     font-size: 32px;
                 }
             }
+
+            .title{
+                .span{
+                    width: 50vw;
+                }
+
+                .toggle{
+                    margin-left: 50vw;
+                    width: 8vw;
+                }
+            }
+            
+            .valueOption{
+                .span{
+                    width: 50vw;
+                }
+            }
         }
 
         .enableAlarm{

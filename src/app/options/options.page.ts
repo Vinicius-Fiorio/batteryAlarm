@@ -90,19 +90,20 @@ export class OptionsPage{
 
   //Date Time chooser
   async presentModal() {
-    const modal = await this.modalController.create({
-      component: DateTimePage,
-      cssClass: 'my-custom-class',
-      swipeToClose: true
-    });
+      const modal = await this.modalController.create({
+        component: DateTimePage,
+        cssClass: 'my-custom-class',
+        swipeToClose: true
+      });
 
-    await modal.present();
+      await modal.present();
 
-    const { data } = await modal.onWillDismiss();
-
-    this.options.notDisturbing.start = data.start
-    this.options.notDisturbing.end = data.end
-    console.log(data);
+      const { data } = await modal.onWillDismiss();
+  
+      this.options.notDisturbing.start = data.start
+      this.options.notDisturbing.end = data.end
+      console.log(data);
+    
   }
 
   // Alarm Method

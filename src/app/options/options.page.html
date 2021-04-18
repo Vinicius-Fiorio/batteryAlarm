@@ -50,20 +50,24 @@
       </div>
     </div>
 
-    <div class="disturbing" (click)="presentModal()">
-      <div class="icon">
+    <div class="disturbing">
+      <div class="icon" (click)="presentModal()">
         <div class="avatar">
           <ion-icon name="notifications-off"></ion-icon>
         </div>
       </div>
-      <div class="title">
-        <span>Do not Disturbing</span>
+      <div class="title" >
+        <div class="span" (click)="presentModal()">
+          <span>Do not Disturbing</span>
+        </div>
         <div class="toggle">
           <ion-toggle [(ngModel)]="options.notDisturbing.active"></ion-toggle>
         </div>
       </div>
-      <div class="valueOption">
-        <span>{{options.notDisturbing.start}} - {{options.notDisturbing.end}}</span>
+      <div class="valueOption" >
+        <div class="span" (click)="presentModal()">
+          <span>{{options.notDisturbing.start}} - {{options.notDisturbing.end}}</span>
+        </div>
       </div>
     </div>
 
