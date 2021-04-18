@@ -1,4 +1,4 @@
-<ion-header (click)="closeModal()">
+<ion-header>
   <div class="header">
     <span>Set Time</span>
   </div>
@@ -6,8 +6,42 @@
 
 <ion-content fullscreen>
   <div class="container">
-    <ion-datetime [(ngModel)]="startTime" display-format="hh:mm A" picker-format="h:mm A"></ion-datetime>
 
-    <ion-datetime [(ngModel)]="endTime" display-format="hh:mm A" picker-format="h:mm A"></ion-datetime>
+    <div class="start">
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="flash"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Start Time</span>
+      </div>
+      <div class="valueOption">
+        <span>{{startTime}}</span>
+        <ion-datetime [(ngModel)]="startTime" picker-format="HH:mm"></ion-datetime>
+      </div>
+    </div>
+
+    <div class="end">
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="flash-off"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>End Time</span>
+      </div>
+      <div class="valueOption">
+        <span>{{endTime}}</span>
+        <ion-datetime [(ngModel)]="endTime" picker-format="HH:mm"></ion-datetime>
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<ion-footer class="ion-footer ion-no-border" (click)="closeModal()">
+  <div class="buttonSave">
+    <span>Save Changes</span>
+    <ion-icon name="checkmark-circle"></ion-icon>
+  </div>
+</ion-footer>

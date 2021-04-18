@@ -93,7 +93,7 @@ export class OptionsPage{
       const modal = await this.modalController.create({
         component: DateTimePage,
         cssClass: 'my-custom-class',
-        swipeToClose: true
+        swipeToClose: false
       });
 
       await modal.present();

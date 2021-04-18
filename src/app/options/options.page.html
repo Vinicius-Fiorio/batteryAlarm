@@ -107,7 +107,7 @@
         </div>
       </div>
       <div class="valueOption">
-        <span>Manual</span>
+        <span>Theme Dark</span>
       </div>
     </div>
 
@@ -118,10 +118,14 @@
         </div>
       </div>
       <div class="title">
+        <ion-select [(ngModel)]="options.language" mode="ios">
+          <ion-select-option [value]="English">English</ion-select-option>
+          <ion-select-option [value]="Portuguese">Portuguese</ion-select-option>
+        </ion-select>
         <span>Language</span>
       </div>
       <div class="valueOption">
-        <span>English</span>
+        <span>{{options.language}}</span>
       </div>
     </div>
     <br>
