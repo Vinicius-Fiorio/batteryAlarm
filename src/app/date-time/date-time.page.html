@@ -17,8 +17,8 @@
         <span>Start Time</span>
       </div>
       <div class="valueOption">
-        <span>{{startTime}}</span>
-        <ion-datetime [(ngModel)]="startTime" picker-format="HH:mm"></ion-datetime>
+        <span>{{start}}</span>
+        <ion-datetime [(ngModel)]="start" picker-format="HH:mm"></ion-datetime>
       </div>
     </div>
 
@@ -32,8 +32,8 @@
         <span>End Time</span>
       </div>
       <div class="valueOption">
-        <span>{{endTime}}</span>
-        <ion-datetime [(ngModel)]="endTime" picker-format="HH:mm"></ion-datetime>
+        <span>{{end}}</span>
+        <ion-datetime [(ngModel)]="end" picker-format="HH:mm"></ion-datetime>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
 
 <ion-footer class="ion-footer ion-no-border" (click)="closeModal()">
   <div class="buttonSave">
-    <span>Save Changes</span>
+    <span>Change Time</span>
     <ion-icon name="checkmark-circle"></ion-icon>
   </div>
 </ion-footer>

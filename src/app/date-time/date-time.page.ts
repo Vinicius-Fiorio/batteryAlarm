@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,15 +8,16 @@ import { ModalController } from '@ionic/angular';
 })
 export class DateTimePage {
 
-  startTime = "22:00";
-  endTime = "08:00";
+  @Input() start: string;
+  @Input() end: string;
+
 
   constructor(public modalController: ModalController) { }
 
   public closeModal(){
     this.modalController.dismiss({
-    	'start': this.startTime,
-      'end': this.endTime
+    	'start': this.start,
+      'end': this.end
     })
   }
 

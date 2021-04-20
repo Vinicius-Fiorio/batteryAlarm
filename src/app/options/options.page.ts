@@ -102,6 +102,10 @@ export class OptionsPage{
       const modal = await this.modalController.create({
         component: DateTimePage,
         cssClass: 'my-custom-class',
+        componentProps: {
+          'start': this.options.notDisturbing.start,
+          'end': this.options.notDisturbing.end
+        },
         swipeToClose: false
       });
 
@@ -177,6 +181,7 @@ export class OptionsPage{
   //Toast controller
   async presentToast(message:string, color:string) {
     const toast = await this.toastController.create({
+      cssClass: 'toast-container',
       message: message,
       position: 'top',
       color: color,
