@@ -15,6 +15,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

@@ -23,7 +23,10 @@ export class HomePage {
   pathSound:string;
   options:any;
 
-  constructor(public modalController: ModalController, public batteryStatus: BatteryStatus, private localNotifications: LocalNotifications) {
+  constructor(public modalController: ModalController, 
+    public batteryStatus: BatteryStatus, 
+    private localNotifications: LocalNotifications,
+    ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
       this.batterylevel = status.level;
@@ -46,7 +49,6 @@ export class HomePage {
       this.options = JSON.parse(localStorage.getItem('options'));
       this.levelAlarm = this.options.batteryLevelAlarm;
       this.pathSound = this.options.ringtoneSong.path;
-      console.log(this.levelAlarm)
     }
   }
 
@@ -76,19 +78,15 @@ export class HomePage {
 
   scheduleNotification(){
 
-    this.localNotifications.requestPermission().then((permission) => {
-
-      if (permission === true) {
-  
-        // Create the notification
-        this.localNotifications.schedule({
-          id: 1,
-          title: 'Charged battery',
-          text: 'Please remove the charger from the device',
-          vibrate: true,
-        });
-  
-      }
+    // Create the notification
+    this.localNotifications.schedule({
+      id: 1,
+      title: 'Charged battery',
+      text: 'Please remove the charger from the device',
+      vibrate: true,
+      lockscreen: true,
+      foreground: true,
+      sound: 'file://raw/batery_full_capacity.mp3'
     });
   }
 
