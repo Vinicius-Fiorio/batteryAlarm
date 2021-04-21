@@ -5,6 +5,8 @@ import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,20 +18,36 @@ export class HomePage {
   
   batterylevel:number;
   batteryIsPlugged:any;
-  activeAlarm: boolean = false;
+  activeAlarm = false;
+  levelAlarm = 100;
+  pathSound:string;
+  options:any;
 
-  constructor(public modalController: ModalController, public batteryStatus: BatteryStatus) {
+  constructor(public modalController: ModalController, public batteryStatus: BatteryStatus, private localNotifications: LocalNotifications) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
       this.batterylevel = status.level;
       this.batteryIsPlugged = status.isPlugged;
+
+	    if( this.batterylevel >= this.levelAlarm){
+        this.scheduleNotification();
+	    }
     });
+
+    this.localNotifications.hasPermission
   }
 
   ionViewDidEnter(){
     const batterysubscription = this.batteryStatus.onChange().subscribe(status => {  
       this.batterylevel = status.level;
     });
+
+    if (localStorage.getItem('options') !== null) {
+      this.options = JSON.parse(localStorage.getItem('options'));
+      this.levelAlarm = this.options.batteryLevelAlarm;
+      this.pathSound = this.options.ringtoneSong.path;
+      console.log(this.levelAlarm)
+    }
   }
 
   changeActivationAlarm(){
@@ -53,7 +71,29 @@ export class HomePage {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    console.log(data);
+    this.levelAlarm = data.options.batteryLevelAlarm;
+  }
+
+  scheduleNotification(){
+
+    this.localNotifications.requestPermission().then((permission) => {
+
+      if (permission === true) {
+  
+        // Create the notification
+        this.localNotifications.schedule({
+          id: 1,
+          title: 'Charged battery',
+          text: 'Please remove the charger from the device',
+          vibrate: true,
+        });
+  
+      }
+    });
+  }
+
+  clearNotificaation(){
+    this.localNotifications.clearAll();
   }
   
 }
