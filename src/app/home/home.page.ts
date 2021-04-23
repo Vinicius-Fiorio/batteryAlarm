@@ -5,7 +5,10 @@ import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { Plugins, LocalNotification } from '@capacitor/core';
+import { Local } from 'protractor/built/driverProviders';
+
+const { LocalNotifications } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -25,7 +28,6 @@ export class HomePage {
 
   constructor(public modalController: ModalController, 
     public batteryStatus: BatteryStatus, 
-    private localNotifications: LocalNotifications,
     ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
@@ -36,8 +38,10 @@ export class HomePage {
         this.scheduleNotification();
 	    }
     });
+  }
 
-    this.localNotifications.hasPermission
+  async ngOnInit(){
+    await LocalNotifications.requestPermission();
   }
 
   ionViewDidEnter(){
@@ -76,22 +80,34 @@ export class HomePage {
     this.levelAlarm = data.options.batteryLevelAlarm;
   }
 
-  scheduleNotification(){
+  async scheduleNotification(){
+    // Create channel notification
+    await LocalNotifications.createChannel({
+      id: 'test',
+      name:'battery',
+      importance: 5,
+      vibration: true,
+      sound: 'battery_full_capacity.mp3'
+    });
+
+    /*LocalNotifications.deleteChannel({
+      id: 'test',
+      name:'battery',
+      importance: 5,
+
+    });*/
 
     // Create the notification
-    this.localNotifications.schedule({
-      id: 1,
-      title: 'Charged battery',
-      text: 'Please remove the charger from the device',
-      vibrate: true,
-      lockscreen: true,
-      foreground: true,
-      sound: 'file://raw/batery_full_capacity.mp3'
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "Battery is Full",
+          body: "Please remove the charger",
+          id: 1,
+          sound: null,
+          channelId: 'test'
+        }
+      ]
     });
   }
-
-  clearNotificaation(){
-    this.localNotifications.clearAll();
-  }
-  
 }

@@ -1,6 +1,6 @@
 {
   "appId": "io.battery.alert",
-  "appName": "batteryAlertApp",
+  "appName": "Battery Alert App",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

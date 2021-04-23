@@ -29,6 +29,7 @@
     "@ionic-native/file-path": "^5.32.0",
     "@ionic-native/local-notifications": "^5.32.1",
     "@ionic/angular": "^5.5.2",
+    "jetifier": "^1.6.6",
     "ng-circle-progress": "^1.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
