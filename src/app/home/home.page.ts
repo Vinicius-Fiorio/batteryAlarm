@@ -6,7 +6,6 @@ import { OptionsPage } from '../options/options.page';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 import { Plugins, LocalNotification } from '@capacitor/core';
-import { Local } from 'protractor/built/driverProviders';
 
 const { LocalNotifications } = Plugins;
 
@@ -83,7 +82,7 @@ export class HomePage {
   async scheduleNotification(){
     // Create channel notification
     await LocalNotifications.createChannel({
-      id: 'test',
+      id: 'a',
       name:'battery',
       importance: 5,
       vibration: true,
@@ -104,8 +103,7 @@ export class HomePage {
           title: "Battery is Full",
           body: "Please remove the charger",
           id: 1,
-          sound: null,
-          channelId: 'test'
+          channelId: 'a',
         }
       ]
     });

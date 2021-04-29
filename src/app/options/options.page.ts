@@ -7,7 +7,9 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+
 import { DateTimePage } from '../date-time/date-time.page';
+import { MusicOptionsPage } from '../music-options/music-options.page';
 
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
@@ -50,7 +52,7 @@ export class OptionsPage{
     batteryLevelAlarm: 100,
     ringtoneSong: {
       name: 'Default Ringtone',
-      path: '../../assets/batery_full_capacity.mp3'
+      path: 'battery_full_capacity.mp3'
     },
 
     notDisturbing: {
@@ -98,7 +100,7 @@ export class OptionsPage{
   }
 
   //Date Time chooser
-  async presentModal() {
+  async presentModalDate() {
       const modal = await this.modalController.create({
         component: DateTimePage,
         cssClass: 'my-custom-class',
@@ -117,6 +119,22 @@ export class OptionsPage{
       this.options.notDisturbing.end = data.end
       console.log(data);
     
+  }
+
+  //Ringtone Song
+  async presentModalSong() {
+    const modalzin = await this.modalController.create({
+      component: MusicOptionsPage,
+      cssClass: 'my-custom-classs',
+      swipeToClose: false
+    });
+
+    await modalzin.present();
+
+    const { data } = await modalzin.onWillDismiss();
+
+    console.log(data);
+  
   }
 
   // Alarm Method

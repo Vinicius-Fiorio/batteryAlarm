@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'date-time',
     loadChildren: () => import('./date-time/date-time.module').then( m => m.DateTimePageModule)
   },
+  {
+    path: 'music-options',
+    loadChildren: () => import('./music-options/music-options.module').then( m => m.MusicOptionsPageModule)
+  },
 ];
 
 @NgModule({

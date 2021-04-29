@@ -1,0 +1,27 @@
+<ion-content class="ion-content ion-no-border">
+  <p>Settings</p>
+  <div class="containerContent" >
+    <div class="musicOption" *ngFor="let song of songs">
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="musical-note"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>{{song[0]}}</span>
+      </div>
+      <div class="valueOption">
+        <span>{{song[1]}}</span>
+      </div>
+    </div>
+    <br>
+
+  </div>
+</ion-content>
+
+<ion-footer class="ion-footer ion-no-border">
+  <div class="buttonSave">
+    <span>Save Changes</span>
+    <ion-icon name="checkmark-circle"></ion-icon>
+  </div>
+</ion-footer>

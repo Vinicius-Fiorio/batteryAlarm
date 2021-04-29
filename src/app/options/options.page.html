@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="RingtoneSong" (click)="pickFileAlarm()">
+    <div class="RingtoneSong" (click)="presentModalSong()">
       <div class="icon">
         <div class="avatar">
           <ion-icon name="musical-notes"></ion-icon>
@@ -46,18 +46,18 @@
         <span>Ringtone Song</span>
       </div>
       <div class="valueOption">
-        <span>{{options.ringtoneSong.name}}</span>
+        <span>AAAAAAAAAA</span>
       </div>
     </div>
 
     <div class="disturbing">
-      <div class="icon" (click)="presentModal()">
+      <div class="icon" (click)="presentModalDate()">
         <div class="avatar">
           <ion-icon name="notifications-off"></ion-icon>
         </div>
       </div>
       <div class="title" >
-        <div class="span" (click)="presentModal()">
+        <div class="span" (click)="presentModalDate()">
           <span>Do not Disturbing</span>
         </div>
         <div class="toggle">
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="valueOption" >
-        <div class="span" (click)="presentModal()">
+        <div class="span" (click)="presentModalDate()">
           <span>{{options.notDisturbing.start}} - {{options.notDisturbing.end}}</span>
         </div>
       </div>
