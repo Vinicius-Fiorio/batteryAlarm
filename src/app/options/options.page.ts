@@ -4,10 +4,6 @@ import { AlertController } from '@ionic/angular';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
-
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
-import { FilePath } from '@ionic-native/file-path/ngx';
-
 import { DateTimePage } from '../date-time/date-time.page';
 import { MusicOptionsPage } from '../music-options/music-options.page';
 
@@ -31,8 +27,6 @@ export class OptionsPage{
   constructor(public modalController: ModalController, 
     public alertController: AlertController, 
     public batteryStatus: BatteryStatus,
-    private fileChooser: FileChooser,
-    private filePath: FilePath,
     public loadingController: LoadingController,
     public toastController: ToastController
     ) {
@@ -51,7 +45,7 @@ export class OptionsPage{
   options = {
     batteryLevelAlarm: 100,
     ringtoneSong: {
-      name: 'Default Ringtone',
+      name: 'Battery a Full Capacity',
       path: 'battery_full_capacity.mp3'
     },
 
@@ -74,29 +68,6 @@ export class OptionsPage{
     if (localStorage.getItem('options') !== null) {
       this.options = JSON.parse(localStorage.getItem('options'));
     }
-  }
-
-
-  //Ringtone Song
-  pickFileAlarm(){
-
-    let filter={ "mime": "audio/*" } // filter to select only audio files
-    this.fileChooser.open(filter)
-      .then(uri => {
-        this.filePath.resolveNativePath(uri).then(nativePath =>{
-          let filename = nativePath.substring(nativePath.lastIndexOf('/')+1);
-          if(filename.length > 35){
-            let sub = filename.substring(0,35);
-            this.options.ringtoneSong.name = sub.concat(' ...');
-          }else{
-            this.options.ringtoneSong.name = filename;
-          }
-          this.options.ringtoneSong.path = nativePath;
-        })
-      })
-      .catch(e => {
-        this.teste = e;
-      });
   }
 
   //Date Time chooser
@@ -126,12 +97,18 @@ export class OptionsPage{
     const modalzin = await this.modalController.create({
       component: MusicOptionsPage,
       cssClass: 'my-custom-classs',
+      componentProps: {
+        'ringtone': this.options.ringtoneSong
+      },
       swipeToClose: false
     });
 
     await modalzin.present();
 
     const { data } = await modalzin.onWillDismiss();
+
+    this.options.ringtoneSong.name = data.name;
+    this.options.ringtoneSong.path = data.namePath;
 
     console.log(data);
   

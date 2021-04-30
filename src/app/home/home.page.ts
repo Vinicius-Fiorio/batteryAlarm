@@ -76,34 +76,37 @@ export class HomePage {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
+    this.pathSound = this.options.ringtoneSong.path;
     this.levelAlarm = data.options.batteryLevelAlarm;
   }
 
   async scheduleNotification(){
-    // Create channel notification
-    await LocalNotifications.createChannel({
-      id: 'a',
-      name:'battery',
-      importance: 5,
-      vibration: true,
-      sound: 'battery_full_capacity.mp3'
-    });
 
-    /*LocalNotifications.deleteChannel({
-      id: 'test',
+    /*/delete channel notification
+    await LocalNotifications.deleteChannel({
+      id: 'channel',
       name:'battery',
-      importance: 5,
-
+      importance: 5
     });*/
 
-    // Create the notification
+    // Create channel notification
+    await LocalNotifications.createChannel({
+      id: 'aaaa',
+      name:'aaa',
+      description:'channel battery alarm app',
+      importance: 5,
+      sound: "batery_full_capacity.mp3",
+      visibility: 1
+    });
+  
+    // send the notification
     await LocalNotifications.schedule({
       notifications: [
         {
           title: "Battery is Full",
           body: "Please remove the charger",
           id: 1,
-          channelId: 'a',
+          channelId: 'aaaa',
         }
       ]
     });

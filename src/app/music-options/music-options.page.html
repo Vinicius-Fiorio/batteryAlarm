@@ -1,27 +1,30 @@
 <ion-content class="ion-content ion-no-border">
-  <p>Settings</p>
-  <div class="containerContent" >
-    <div class="musicOption" *ngFor="let song of songs">
-      <div class="icon">
-        <div class="avatar">
-          <ion-icon name="musical-note"></ion-icon>
+  <p>Choose Ringtone Notification</p>
+  <div class="containerContent">
+    <div class="musicOption" *ngFor="let song of songs" (click)="mostrar(song);">
+        <div class="icon" *ngIf="song[3]" style="background: #07E092">
+          <div class="avatar">
+            <ion-icon name="musical-note"></ion-icon>
+          </div>
         </div>
-      </div>
-      <div class="title">
-        <span>{{song[0]}}</span>
-      </div>
-      <div class="valueOption">
-        <span>{{song[1]}}</span>
-      </div>
+        <div class="icon" *ngIf="!song[3]" style="background: #FD5B71">
+          <div class="avatar">
+            <ion-icon name="musical-note"></ion-icon>
+          </div>
+        </div>
+        <div class="title">
+          <span>{{song[0]}}</span>
+        </div>
+        <div class="valueOption">
+          <span>{{song[1]}}</span>
+        </div>
     </div>
     <br>
-
   </div>
 </ion-content>
 
-<ion-footer class="ion-footer ion-no-border">
+<ion-footer class="ion-footer ion-no-border" (click)="closeModal()">
   <div class="buttonSave">
-    <span>Save Changes</span>
-    <ion-icon name="checkmark-circle"></ion-icon>
+    <span>Choose Ringtone</span>
   </div>
 </ion-footer>

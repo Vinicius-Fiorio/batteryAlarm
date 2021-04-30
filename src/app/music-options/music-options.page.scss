@@ -92,8 +92,6 @@ ion-content{
             "iconn value value value";
 
             .icon{
-                background: #9B51E0;
-
                 .avatar ion-icon{
                     margin-top: 0.5vh;
                     margin-left: -1vw;
@@ -101,6 +99,28 @@ ion-content{
                 }
             }
 
+        }
+    }
+}
+
+ion-footer{
+    background: #FAFAFF;
+    
+    .buttonSave{
+        background: #9B51E0;
+        height: 11vh;
+        border-radius: 30px 30px 0px 0px;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        color: #FFFFFF;
+
+        span{
+            justify-self: center;
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 20px;
+            padding-right: 2vw;
         }
     }
 }
