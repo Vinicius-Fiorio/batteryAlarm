@@ -5,7 +5,7 @@ import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
-import { Plugins, LocalNotification } from '@capacitor/core';
+import { Plugins} from '@capacitor/core';
 
 const { LocalNotifications } = Plugins;
 
@@ -33,7 +33,7 @@ export class HomePage {
       this.batterylevel = status.level;
       this.batteryIsPlugged = status.isPlugged;
 
-	    if( this.batterylevel >= this.levelAlarm){
+	    if(this.batterylevel >= this.levelAlarm && this.batteryIsPlugged == true){
         this.scheduleNotification();
 	    }
     });
@@ -89,14 +89,41 @@ export class HomePage {
       importance: 5
     });*/
 
+    if (localStorage.getItem('options') !== null) {
+      this.options = JSON.parse(localStorage.getItem('options'));
+      this.pathSound = this.options.ringtoneSong.path;
+    }else{
+      this.pathSound = 'battery_full_capacity.mp3';
+    }
+
     // Create channel notification
     await LocalNotifications.createChannel({
-      id: 'aaaa',
-      name:'aaa',
+      id: 'battery_full_capacity.mp3',
+      name:'Battery Alarm: Song Full Capacity',
       description:'channel battery alarm app',
       importance: 5,
-      sound: "batery_full_capacity.mp3",
+      sound: 'battery_full_capacity.mp3',
       visibility: 1
+    });
+
+    await LocalNotifications.createChannel({
+      id: 'pega_o_pato.mp3',
+      name:'Battery Alarm: Song Pick the Pato',
+      description:'channel battery alarm app',
+      importance: 5,
+      sound: 'pega_o_pato.mp3',
+      visibility: 1,
+      vibration: true
+    });
+
+    await LocalNotifications.createChannel({
+      id: 'iphone_remix.mp3',
+      name:'Battery Alarm: Song iPhone remix',
+      description:'channel battery alarm app',
+      importance: 5,
+      sound: 'iphone_remix.mp3',
+      visibility: 1,
+      vibration: true
     });
   
     // send the notification
@@ -106,7 +133,8 @@ export class HomePage {
           title: "Battery is Full",
           body: "Please remove the charger",
           id: 1,
-          channelId: 'aaaa',
+          channelId: this.pathSound,
+          sound: this.pathSound
         }
       ]
     });
