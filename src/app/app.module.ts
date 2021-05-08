@@ -12,14 +12,12 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
-
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,NgCircleProgressModule,],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BatteryStatus, NativeAudio, LocalNotifications],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BatteryStatus, LocalNotifications],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

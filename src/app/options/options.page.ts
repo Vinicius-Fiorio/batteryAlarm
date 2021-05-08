@@ -187,7 +187,8 @@ export class OptionsPage{
 
   public closeModal(){
     this.modalController.dismiss({
-    	'options': this.options
+    	'options': this.options,
+      'pathSound': this.options.ringtoneSong.path
     })
   }
 

@@ -43,16 +43,22 @@ export class HomePage {
     await LocalNotifications.requestPermission();
   }
 
+  getData(){
+    if (localStorage.getItem('options') !== null) {
+      this.options = JSON.parse(localStorage.getItem('options'));
+      this.levelAlarm = this.options.batteryLevelAlarm;
+      this.pathSound = this.options.ringtoneSong.path.replace('../../assets/','');
+    }else{
+      this.pathSound = 'battery_full_capacity.mp3'; //sound default
+    }
+  }
+
   ionViewDidEnter(){
     const batterysubscription = this.batteryStatus.onChange().subscribe(status => {  
       this.batterylevel = status.level;
     });
 
-    if (localStorage.getItem('options') !== null) {
-      this.options = JSON.parse(localStorage.getItem('options'));
-      this.levelAlarm = this.options.batteryLevelAlarm;
-      this.pathSound = this.options.ringtoneSong.path;
-    }
+    this.getData();
   }
 
   changeActivationAlarm(){
@@ -75,9 +81,9 @@ export class HomePage {
 
     await modal.present();
 
-    const { data } = await modal.onWillDismiss();
-    this.pathSound = this.options.ringtoneSong.path;
-    this.levelAlarm = data.options.batteryLevelAlarm;
+    let { data } = await modal.onWillDismiss();
+    console.log(data);
+    this.getData();
   }
 
   async scheduleNotification(){
@@ -89,12 +95,7 @@ export class HomePage {
       importance: 5
     });*/
 
-    if (localStorage.getItem('options') !== null) {
-      this.options = JSON.parse(localStorage.getItem('options'));
-      this.pathSound = this.options.ringtoneSong.path;
-    }else{
-      this.pathSound = 'battery_full_capacity.mp3';
-    }
+    this.getData();
 
     // Create channel notification
     await LocalNotifications.createChannel({
