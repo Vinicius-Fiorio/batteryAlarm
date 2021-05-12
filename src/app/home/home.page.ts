@@ -18,12 +18,13 @@ const { LocalNotifications } = Plugins;
 
 export class HomePage {
   
-  batterylevel:number;
-  batteryIsPlugged:any;
+  batterylevel: number;
+  batteryIsPlugged: any;
   activeAlarm = false;
-  levelAlarm = 100;
-  pathSound:string;
-  options:any;
+  levelAlarm: number;
+  pathSound: string;
+  options: any;
+  disableButton: boolean;
 
   constructor(public modalController: ModalController, 
     public batteryStatus: BatteryStatus, 
@@ -33,9 +34,8 @@ export class HomePage {
       this.batterylevel = status.level;
       this.batteryIsPlugged = status.isPlugged;
 
-	    if(this.batterylevel >= this.levelAlarm && this.batteryIsPlugged == true){
-        this.scheduleNotification();
-	    }
+      this.getData();
+      this.changeButton();
     });
   }
 
@@ -48,21 +48,64 @@ export class HomePage {
       this.options = JSON.parse(localStorage.getItem('options'));
       this.levelAlarm = this.options.batteryLevelAlarm;
       this.pathSound = this.options.ringtoneSong.path.replace('../../assets/','');
+      if(this.options.alarmMethod.enableMethod == 'Plug-in'){
+        this.activeAlarm = true;
+      }
     }else{
       this.pathSound = 'battery_full_capacity.mp3'; //sound default
+      this.levelAlarm = 100;
+    }
+  }
+
+  statusNotification(){
+    if(this.options.alarmMethod.enableMethod == 'Manual' && this.activeAlarm == true){
+      if(this.batterylevel >= this.levelAlarm && this.batteryIsPlugged == true){
+        this.scheduleNotification();
+      }
+
+    }else if(this.options.alarmMethod.enableMethod == 'Plug-in' && this.batteryIsPlugged == true){
+      if(this.batterylevel >= this.levelAlarm){
+        this.scheduleNotification();
+      }
+    } 
+    if(this.options.alarmMethod.disableMethod == 'Plug-in' && this.batteryIsPlugged == false){
+      this.cancelNotification();
     }
   }
 
   ionViewDidEnter(){
     const batterysubscription = this.batteryStatus.onChange().subscribe(status => {  
       this.batterylevel = status.level;
-    });
 
+      this.changeButton();
+      this.statusNotification();
+    });
     this.getData();
+  }
+
+  changeButton(){
+    if(this.options.alarmMethod.enableMethod == 'Plug-in'){
+      this.activeAlarm = true;
+      this.disableButton = true;
+    }else if(this.options.alarmMethod.enableMethod == 'Manual'){
+      this.disableButton = false;
+    }
+
+    if(this.options.alarmMethod.disableMethod == 'Manual' && this.batterylevel >= this.levelAlarm && this.batteryIsPlugged == true){
+      this.disableButton = false;
+      this.activeAlarm = true;
+    }else if(this.options.alarmMethod.disableMethod == 'Plug-in' && this.batterylevel >= this.levelAlarm){
+      this.disableButton = true;
+      this.activeAlarm = this.batteryIsPlugged? true : false;
+    }
+    
   }
 
   changeActivationAlarm(){
     this.activeAlarm = !this.activeAlarm;
+    if(this.batterylevel >= this.levelAlarm && this.options.alarmMethod.disableMethod == 'Manual' && this.activeAlarm == false){
+      this.cancelNotification();
+    }
   }
 
   formatTitle = () => `${this.batterylevel}%`;
@@ -139,5 +182,10 @@ export class HomePage {
         }
       ]
     });
+  }
+
+  async cancelNotification(){
+    const peding = await LocalNotifications.getPending();
+    LocalNotifications.cancel(peding);
   }
 }

@@ -13,6 +13,7 @@ import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

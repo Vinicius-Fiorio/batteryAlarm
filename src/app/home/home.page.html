@@ -15,12 +15,12 @@
 
     <div class="option-button-container">
       <div class="option-button-1">
-        <ion-button *ngIf="!activeAlarm; else pause" (click)="changeActivationAlarm();scheduleNotification()">
+        <ion-button [disabled]="disableButton"*ngIf="!activeAlarm; else pause" (click)="changeActivationAlarm();scheduleNotification()">
           <ion-icon slot="icon-only" name="play"></ion-icon>
         </ion-button>
 
         <ng-template #pause>
-          <ion-button (click)="changeActivationAlarm()">
+          <ion-button [disabled]="disableButton" (click)="changeActivationAlarm();cancelNotification()">
             <ion-icon name="pause"></ion-icon>
           </ion-button>
         </ng-template>
@@ -53,4 +53,3 @@
     </footer>
   </div>
 </body>
-
