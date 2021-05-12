@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
@@ -28,7 +28,7 @@ export class OptionsPage{
     public alertController: AlertController, 
     public batteryStatus: BatteryStatus,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
     ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{

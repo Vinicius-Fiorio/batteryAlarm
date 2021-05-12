@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OptionsPageRoutingModule } from './options-routing.module';
 
 import { OptionsPage } from './options.page';
+import { HideHeaderDirective } from '../directives/hide-header.directive';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OptionsPage } from './options.page';
     IonicModule,
     OptionsPageRoutingModule
   ],
-  declarations: [OptionsPage]
+  declarations: [OptionsPage, HideHeaderDirective]
 })
 export class OptionsPageModule {}
