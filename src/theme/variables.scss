@@ -2,7 +2,33 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+
+body[color-theme="light"]{
+  /** app colors **/
+  --background-color: #FAFAFF;
+  --background-div:#FFFFFF;
+  --background-documentation: #FFFFFF;
+  --white-color: #FFFFFF;
+  --title: #070417;
+  --background-info: #070417;
+  --tilte-option: black;
+  --color-value-option: #828282;
+  --background-value-option: #F2F2F2;
+  --button-home: rgba(189, 189, 189, 0.5);
+  --button-subtitle: #8c8c8c;
+  --icon-button:#BDBDBD;
+  --text-credits: #514F5D;
+  --background-alarm-enable: #E6FCF4;
+  --color-alarm-enable: #15E298;
+  --background-alarm-disable: #FFEFF1;
+  --color-alarm-disable: #FD5B71;
+
+  --innerStrokeColor: #e9e9ff;
+}
+
 :root {
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -76,13 +102,35 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  /*
+/*@media (prefers-color-scheme: dark) {
+  
    * Dark Colors
    * -------------------------------------------
    */
 
-  body {
+
+  body[color-theme="dark"] {
+
+    /** app colors **/
+    --background-color: #070417;
+    --background-div:#0704179a;
+    --background-documentation: #130f29e1;
+    --white-color: #FFFFFF;
+    --title: #FFFFFF;
+    --background-info: #292639;
+    --tilte-option: #FFFFFF;
+    --color-value-option: #979797;
+    --background-value-option: #18152C;
+    --button-home: rgba(41, 38, 57, 0.5);
+    --button-subtitle: #BDBDBD;
+    --icon-button:#FFFFFF;
+    --text-credits: #BDBDBD;
+    --background-alarm-enable: #071A23;
+    --color-alarm-enable: #07E092;
+    --background-alarm-disable: #1F0D20;
+    --color-alarm-disable: #FD5B71;
+    --innerStrokeColor: #1B143F; 
+
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;
@@ -152,7 +200,27 @@
    * -------------------------------------------
    */
 
-  .ios body {
+  .ios body[color-theme="dark"]  {
+
+    --background-color: #070417;
+    --background-div:#0704179a;
+    --background-documentation: #130f29e1;
+    --white-color: #FFFFFF;
+    --title: #FFFFFF;
+    --background-info: #292639;
+    --tilte-option: #FFFFFF;
+    --color-value-option: #979797;
+    --background-value-option: #18152C;
+    --button-home: rgba(41, 38, 57, 0.5);
+    --button-subtitle: #BDBDBD;
+    --icon-button:#FFFFFF;
+    --text-credits: #BDBDBD;
+    --background-alarm-enable: #071A23;
+    --color-alarm-enable: #07E092;
+    --background-alarm-disable: #1F0D20;
+    --color-alarm-disable: #FD5B71;
+    --innerStrokeColor: #1B143F; 
+
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0,0,0;
 
@@ -196,7 +264,27 @@
    * -------------------------------------------
    */
 
-  .md body {
+  .md body[color-theme="dark"]  {
+
+    --background-color: #070417;
+    --background-div:#0704179a;
+    --background-documentation: #130f29e1;
+    --white-color: #FFFFFF;
+    --title: #FFFFFF;
+    --background-info: #292639;
+    --tilte-option: #FFFFFF;
+    --color-value-option: #979797;
+    --background-value-option: #18152C;
+    --button-home: rgba(41, 38, 57, 0.5);
+    --button-subtitle: #BDBDBD;
+    --icon-button:#FFFFFF;
+    --text-credits: #BDBDBD;
+    --background-alarm-enable: #071A23;
+    --color-alarm-enable: #07E092;
+    --background-alarm-disable: #1F0D20;
+    --color-alarm-disable: #FD5B71;
+    --innerStrokeColor: #1B143F; 
+
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18,18,18;
 
@@ -233,4 +321,4 @@
 
     --ion-card-background: #1e1e1e;
   }
-}
+

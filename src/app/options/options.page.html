@@ -50,27 +50,6 @@
       </div>
     </div>
 
-    <div class="disturbing">
-      <div class="icon" (click)="presentModalDate()">
-        <div class="avatar">
-          <ion-icon name="notifications-off"></ion-icon>
-        </div>
-      </div>
-      <div class="title" >
-        <div class="span" (click)="presentModalDate()">
-          <span>Do not Disturbing</span>
-        </div>
-        <div class="toggle">
-          <ion-toggle [(ngModel)]="options.notDisturbing.active"></ion-toggle>
-        </div>
-      </div>
-      <div class="valueOption" >
-        <div class="span" (click)="presentModalDate()">
-          <span>{{options.notDisturbing.start}} - {{options.notDisturbing.end}}</span>
-        </div>
-      </div>
-    </div>
-
     <div class="enableAlarm">
       <div class="icon">
         <div class="avatar">
@@ -94,23 +73,6 @@
       </div>
     </div>
 
-    <div class="darkMode">
-      <div class="icon">
-        <div class="avatar">
-          <ion-icon name="moon"></ion-icon>
-        </div>
-      </div>
-      <div class="title">
-        <span>Dark Mode</span>
-        <div class="toggle">
-          <ion-toggle [(ngModel)]="options.darkMode"></ion-toggle>
-        </div>
-      </div>
-      <div class="valueOption">
-        <span>Theme Dark</span>
-      </div>
-    </div>
-
     <div class="language">
       <div class="icon">
         <div class="avatar">
@@ -126,6 +88,37 @@
       </div>
       <div class="valueOption">
         <span>{{options.language}}</span>
+      </div>
+    </div>
+
+    <div class="darkMode">
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="moon"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>Dark Mode</span>
+        <div class="toggle">
+          <ion-toggle [(ngModel)]="options.darkMode" (ionChange)="toogleTheme($event)"></ion-toggle>
+        </div>
+      </div>
+      <div class="valueOption">
+        <span>Theme Dark</span>
+      </div>
+    </div>
+
+    <div class="about" (click)="presentModalDate()">
+      <div class="icon">
+        <div class="avatar">
+          <ion-icon name="help"></ion-icon>
+        </div>
+      </div>
+      <div class="title">
+        <span>How to Use</span>
+      </div>
+      <div class="valueOption">
+        <span>Documentation</span>
       </div>
     </div>
 

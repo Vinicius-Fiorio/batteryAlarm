@@ -1,47 +1,69 @@
 <ion-header>
   <div class="header">
-    <span>Set Time</span>
+    <span>How to Use</span> <ion-icon name="close" (click)="closeModal()"></ion-icon>
   </div>
 </ion-header>
 
 <ion-content fullscreen>
   <div class="container">
 
-    <div class="start">
-      <div class="icon">
-        <div class="avatar">
-          <ion-icon name="flash"></ion-icon>
-        </div>
-      </div>
+    <div class="options">
       <div class="title">
-        <span>Start Time</span>
+        <span>Notification</span>
       </div>
-      <div class="valueOption">
-        <span>{{start}}</span>
-        <ion-datetime [(ngModel)]="start" picker-format="HH:mm"></ion-datetime>
+      <div class="description">
+        <p>You can configure it to appear floating and on the lock screen (on android it will appear minimized by default), just go to the <span>Application Information > Notifications</span>, there you can configure how you want the notifications of this application to appear.</p>
       </div>
     </div>
 
-    <div class="end">
-      <div class="icon">
-        <div class="avatar">
-          <ion-icon name="flash-off"></ion-icon>
-        </div>
-      </div>
+    <div class="options">
       <div class="title">
-        <span>End Time</span>
+        <span>Battery level Alarm</span>
       </div>
-      <div class="valueOption">
-        <span>{{end}}</span>
-        <ion-datetime [(ngModel)]="end" picker-format="HH:mm"></ion-datetime>
+      <div class="description">
+        <p>Select the percentage of battery you want to receive a notification.</p>
       </div>
     </div>
+
+    <div class="options">
+      <div class="title">
+        <span>Ringtone Song</span>
+      </div>
+      <div class="description">
+        <p>Select the song you want to play when you receive a notification (currently the app provides 3 options).</p>
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="title">
+        <span>Enable/Disable alarm with</span>
+      </div>
+      <div class="description">
+        <p>Select the options to enable and disable the alarm.
+          <b>Plug-in:</b> As soon as the device is connected to the charger the application will be observing its battery level automatically / when the alarm is triggered just disconnect the charger and the alarm ends and the notification ends <br>
+          <b>Manual:</b> On the home page you will have to press the "Turn On" button for the application to observe the battery level and when the alarm is triggered you will have to press the "Turn Off" button to end the notification.</p>
+        <p>Ps: after selecting and saving an option you will have to restart the app.</p>
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="title">
+        <span>Language</span>
+      </div>
+      <div class="description">
+        <p>Select the language you prefer to use the application,currently the app provides 2 options(English and Portuguese).</p>
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="title">
+        <span>Dark Mode</span>
+      </div>
+      <div class="description">
+        <p>Active the dark theme to use the aplication.</p>
+      </div>
+    </div>
+    <br><br>
   </div>
 </ion-content>
 
-<ion-footer class="ion-footer ion-no-border" (click)="closeModal()">
-  <div class="buttonSave">
-    <span>Change Time</span>
-    <ion-icon name="checkmark-circle"></ion-icon>
-  </div>
-</ion-footer>

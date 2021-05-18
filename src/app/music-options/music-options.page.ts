@@ -51,7 +51,13 @@ export class MusicOptionsPage implements OnInit {
 
   public closeModal(){
 
-    this.player.stop()
+    try{
+      this.player.pause()
+    } 
+    catch(error){
+      if(error.name == 'TypeError')
+        console.log('Não foi possivel pausar a música, pois nenhuma estava sendo reproduzida')
+    }
 
     for(let i=0; i<this.songs.length; i++){
       if(this.songs[i][3] == true){

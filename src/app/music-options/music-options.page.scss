@@ -2,37 +2,33 @@
     font-family: 'Rubik', sans-serif;
     margin: 0;
     padding: 0;
-    --background: #FAFAFF;
+    --background: var(--background-color);
 }
 
-.ion-header{
-    background: #FAFAFF;
-}
+ion-header{
+    height: 11vh;
+    background: var(--background-color);
 
-ion-select{
-    position: absolute;
-    background: none;
-    width: 65vw;
-    height: 10.5vh;
-    margin-top: -2vh;
-}
-ion-select::part(icon) {
-    opacity: 0;
-}
-ion-select::part(text) {
-    opacity: 0;
+    >p{
+        padding-top: 4vh;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--title);
+    }
 }
 
 ion-content{
-    --background: #FAFAFF;
+    --background: var(--background-color);
+
     .containerContent{
         height: 100%;
         width: 90vw;
         margin: 0 auto;
-        background: #FAFAFF ;
+        background: var(--background-color) ;
 
         >div{
-            background: #FFFFFF;
+            background: var(--background-documentation);
             margin-top: 2vh;
             height: 11.8vh;
             border-radius: 10px;
@@ -45,7 +41,7 @@ ion-content{
             font-weight: 500;
             font-size: 1rem;
             line-height: 20px;
-            color: black;
+            color: var(--title);
             margin-top: 2vh;
         }
 
@@ -73,12 +69,12 @@ ion-content{
             margin-top: 0.8vh;
             background: none;
             align-self: start;
-            color: #828282;
+            color: var(--color-value-option);
             font-size: 0.9rem;
             font-weight: normal;
 
             span{
-                background: #F2F2F2;
+                background: var(--background-value-option);
                 padding: 0.5vh 1vw 0.5vh 1vw;
                 border-radius: 5px;
             }
@@ -104,7 +100,7 @@ ion-content{
 }
 
 ion-footer{
-    background: #FAFAFF;
+    background: var(--background-color);
     
     .buttonSave{
         background: #9B51E0;

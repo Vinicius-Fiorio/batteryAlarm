@@ -40,6 +40,12 @@ export class HomePage {
   }
 
   async ngOnInit(){
+    this.getData()
+    if(this.options.darkMode)
+      document.body.setAttribute('color-theme','dark')
+    else
+      document.body.setAttribute('color-theme','light')
+
     await LocalNotifications.requestPermission();
   }
 
@@ -98,7 +104,6 @@ export class HomePage {
       this.disableButton = true;
       this.activeAlarm = this.batteryIsPlugged? true : false;
     }
-    
   }
 
   changeActivationAlarm(){

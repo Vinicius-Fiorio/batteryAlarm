@@ -49,12 +49,6 @@ export class OptionsPage{
       path: 'battery_full_capacity.mp3'
     },
 
-    notDisturbing: {
-      active: false,
-      start: '22:00',
-      end: '8:00'
-    },
-
     alarmMethod:{
       enableMethod: 'Plug-in',
       disableMethod: 'Manual'
@@ -75,21 +69,10 @@ export class OptionsPage{
       const modal = await this.modalController.create({
         component: DateTimePage,
         cssClass: 'my-custom-class',
-        componentProps: {
-          'start': this.options.notDisturbing.start,
-          'end': this.options.notDisturbing.end
-        },
         swipeToClose: false
       });
 
       await modal.present();
-
-      const { data } = await modal.onWillDismiss();
-  
-      this.options.notDisturbing.start = data.start
-      this.options.notDisturbing.end = data.end
-      console.log(data);
-    
   }
 
   //Ringtone Song
@@ -155,8 +138,18 @@ export class OptionsPage{
     }finally{
       setTimeout(() => {
         this.presentToast(message,color);
-      }, 1500);
+      }, 1200);
       
+    }
+  }
+
+  toogleTheme(event){
+    if(event.detail.checked){
+      this.options.darkMode = true;
+      document.body.setAttribute('color-theme', 'dark');
+    }else{
+      this.options.darkMode = false;
+      document.body.setAttribute('color-theme', 'light');
     }
   }
 
@@ -186,10 +179,17 @@ export class OptionsPage{
   }
 
   public closeModal(){
+    if (localStorage.getItem('options') !== null) {
+      let optionsData = JSON.parse(localStorage.getItem('options'));
+
+      if(JSON.stringify(this.options) != JSON.stringify(optionsData)){
+        this.insertData(this.options);
+      }
+    }
+
     this.modalController.dismiss({
     	'options': this.options,
       'pathSound': this.options.ringtoneSong.path
     })
   }
-
 }

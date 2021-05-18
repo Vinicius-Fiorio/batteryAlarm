@@ -1,6 +1,7 @@
 body{
-  background: #FFFFFF;
+  background: var(--background-color);
   font-family: 'Rubik', sans-serif;
+  --percent-color: var(--title);
 }
 .container{
   margin: 0;
@@ -25,7 +26,7 @@ header{
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  color: #070417;
+  color: var(--title);
   
 }
 
@@ -33,6 +34,11 @@ main{
   grid-area: main;
   width: 100vw;
   height: 40vh;
+  color: var(--title);
+
+  circle-progress{
+    color: red;
+  }
 }
 
 .option-button-container{
@@ -54,10 +60,10 @@ ion-button{
   width: 3.5rem;
   height: 3.5rem;
   --border-radius: 50%;
-  --background: rgba(189, 189, 189, 0.5);
+  --background: var(--button-home);
 
   ion-icon{
-    color: #BDBDBD;
+    color: var(--icon-button);
     font-size: 32px;
   }
 }
@@ -72,14 +78,14 @@ ion-button{
 
 .option-button-subtitle-1{
   grid-area: sub1;
-  color: #8c8c8c;
+  color: var(--button-subtitle);
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
 }
 .option-button-subtitle-2{
   grid-area: sub2;
-  color: #8c8c8c;
+  color: var(--button-subtitle);
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -88,7 +94,7 @@ ion-button{
 footer{
   grid-area: f;
   margin-top: 5rem;
-  color: #514F5D;
+  color: var(--text-credits);
   font-weight: 500;
   font-size: 10px;
   line-height: 32px;

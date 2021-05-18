@@ -9,13 +9,13 @@
       <p>Your Battery</p>
     </header>
     <main class="circle-progress">
-      <circle-progress [percent]="batterylevel" [titleFormat]="formatTitle" [outerStrokeColor]="'#a74fff'"
-        [outerStrokeGradientStopColor]="'#7012CE'"></circle-progress>
+      <circle-progress [percent]="batterylevel" [titleFormat]="formatTitle" [titleColor]="'var(--percent-color)'" [outerStrokeColor]="'#a74fff'"
+        [outerStrokeGradientStopColor]="'#7012CE'" [innerStrokeColor]="'var(--innerStrokeColor)'"></circle-progress>
     </main>
 
     <div class="option-button-container">
       <div class="option-button-1">
-        <ion-button [disabled]="disableButton"*ngIf="!activeAlarm; else pause" (click)="changeActivationAlarm();scheduleNotification()">
+        <ion-button [disabled]="disableButton"*ngIf="!activeAlarm; else pause" (click)="changeActivationAlarm()">
           <ion-icon slot="icon-only" name="play"></ion-icon>
         </ion-button>
 
