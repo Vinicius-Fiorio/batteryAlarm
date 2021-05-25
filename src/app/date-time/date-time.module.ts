@@ -8,12 +8,15 @@ import { DateTimePageRoutingModule } from './date-time-routing.module';
 
 import { DateTimePage } from './date-time.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DateTimePageRoutingModule
+    DateTimePageRoutingModule,
+    TranslateModule
   ],
   declarations: [DateTimePage]
 })

@@ -9,6 +9,7 @@ import { MusicOptionsPage } from '../music-options/music-options.page';
 
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-options',
@@ -22,25 +23,8 @@ export class OptionsPage{
 
   percents=[];
   methodValue:number;
-  teste:any;
 
-  constructor(public modalController: ModalController, 
-    public alertController: AlertController, 
-    public batteryStatus: BatteryStatus,
-    public loadingController: LoadingController,
-    public toastController: ToastController,
-    ) {
-
-    this.batteryStatus.onChange().subscribe((status) =>{
-      this.battery = status.level;
-      this.status = status.isPlugged;
-    });
-
-    //initialize array percents
-    for(let x = 1; x<=100;x++){
-      this.percents.push(x);
-    };
-  }
+  langs: string[] = [];
 
   options = {
     batteryLevelAlarm: 100,
@@ -58,10 +42,41 @@ export class OptionsPage{
     language: 'English'
   }
 
+  constructor(public modalController: ModalController, 
+    public alertController: AlertController, 
+    public batteryStatus: BatteryStatus,
+    public loadingController: LoadingController,
+    public toastController: ToastController,
+    private translate: TranslateService
+    ) {
+
+
+    this.batteryStatus.onChange().subscribe((status) =>{
+      this.battery = status.level;
+      this.status = status.isPlugged;
+    });
+
+    //initialize array percents
+    for(let x = 1; x<=100;x++){
+      this.percents.push(x);
+    };
+  }
+
+  changeLang(lang: string) {
+    console.log(lang)
+    localStorage.setItem('options', JSON.stringify(this.options));
+    this.translate.use(lang.substring(0,2));
+  }
+
   ngOnInit(){
     if (localStorage.getItem('options') !== null) {
       this.options = JSON.parse(localStorage.getItem('options'));
     }
+
+    this.translate.setDefaultLang(this.options.language.substring(0,2));
+    this.translate.use(this.options.language.substring(0,2));
+    this.translate.addLangs(['en', 'pt']);
+    this.langs = this.translate.getLangs();
   }
 
   //Date Time chooser
@@ -128,7 +143,9 @@ export class OptionsPage{
 
     try{
       localStorage.setItem('options', JSON.stringify(options));
-      message = 'Your settings have been saved';
+      this.translate.get('messageToast').subscribe((msg) =>{
+        message = msg;
+      })
       color = 'success';
 
     }catch(error){
@@ -155,11 +172,17 @@ export class OptionsPage{
 
   //Loading controller
   async presentLoading() {
+
+    let loadingMesasge:string;
+    this.translate.get('loading').subscribe((msg) =>{
+      loadingMesasge =  msg;
+    })
+
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       spinner: 'crescent',
       mode: 'ios',
-      message: 'Please wait...',
+      message: loadingMesasge,
       duration: 1000
     });
     await loading.present();

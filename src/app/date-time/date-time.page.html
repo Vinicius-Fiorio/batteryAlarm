@@ -1,6 +1,6 @@
 <ion-header>
   <div class="header">
-    <span>How to Use</span> <ion-icon name="close" (click)="closeModal()"></ion-icon>
+    <span>{{'howUse' | translate}}</span> <ion-icon name="close" (click)="closeModal()"></ion-icon>
   </div>
 </ion-header>
 
@@ -9,58 +9,56 @@
 
     <div class="options">
       <div class="title">
-        <span>Notification</span>
+        <span>{{'notifcation' | translate}}</span>
       </div>
       <div class="description">
-        <p>You can configure it to appear floating and on the lock screen (on android it will appear minimized by default), just go to the <span>Application Information > Notifications</span>, there you can configure how you want the notifications of this application to appear.</p>
+        <p [innerHTML]="'descriptionNot' | translate"></p>
       </div>
     </div>
 
     <div class="options">
       <div class="title">
-        <span>Battery level Alarm</span>
+        <span>{{'batteryLevel' | translate}}</span>
       </div>
       <div class="description">
-        <p>Select the percentage of battery you want to receive a notification.</p>
+        <p>{{'levelDescription' | translate}}</p>
       </div>
     </div>
 
     <div class="options">
       <div class="title">
-        <span>Ringtone Song</span>
+        <span>{{'ringtone' | translate}}</span>
       </div>
       <div class="description">
-        <p>Select the song you want to play when you receive a notification (currently the app provides 3 options).</p>
+        <p>{{'rinDescription' | translate}}</p>
       </div>
     </div>
 
     <div class="options">
       <div class="title">
-        <span>Enable/Disable alarm with</span>
+        <span>{{'onAlarm' | translate}}</span>
       </div>
       <div class="description">
-        <p>Select the options to enable and disable the alarm.
-          <b>Plug-in:</b> As soon as the device is connected to the charger the application will be observing its battery level automatically / when the alarm is triggered just disconnect the charger and the alarm ends and the notification ends <br>
-          <b>Manual:</b> On the home page you will have to press the "Turn On" button for the application to observe the battery level and when the alarm is triggered you will have to press the "Turn Off" button to end the notification.</p>
-        <p>Ps: after selecting and saving an option you will have to restart the app.</p>
+        <p [innerHTML]="'alarmDescription' | translate"></p>
+        <p>{{'psAlarmDesc' | translate}}</p>
       </div>
     </div>
 
     <div class="options">
       <div class="title">
-        <span>Language</span>
+        <span>{{'language' | translate}}</span>
       </div>
       <div class="description">
-        <p>Select the language you prefer to use the application,currently the app provides 2 options(English and Portuguese).</p>
+        <p>{{'languageDescription' | translate}}</p>
       </div>
     </div>
 
     <div class="options">
       <div class="title">
-        <span>Dark Mode</span>
+        <span>{{'darkTheme' | translate}}</span>
       </div>
       <div class="description">
-        <p>Active the dark theme to use the aplication.</p>
+        <p>{{'darkDescription' | translate}}</p>
       </div>
     </div>
     <br><br>

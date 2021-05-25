@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <header class="title">
-      <p>Your Battery</p>
+      <p>{{'titleBaterry' | translate }}</p>
     </header>
     <main class="circle-progress">
       <circle-progress [percent]="batterylevel" [titleFormat]="formatTitle" [titleColor]="'var(--percent-color)'" [outerStrokeColor]="'#a74fff'"
@@ -33,22 +33,22 @@
       </div>
 
       <div *ngIf="!activeAlarm; else pauseText" class="option-button-subtitle-1">
-        <p>Turn On</p>
+        <p>{{'turnOn' | translate }}</p>
       </div>
 
       <ng-template #pauseText>
         <div class="option-button-subtitle-1">
-          <p>Turn Off</p>
+          <p>{{'turnOff' | translate }}</p>
         </div>
       </ng-template>
 
       <div class="option-button-subtitle-2">
-        <p>Settings</p>
+        <p>{{'settings' | translate }}</p>
       </div>
     </div>
 
     <footer class="footer">
-      <p>Made with 💜 by <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vinicius-Fiorio">Vinicius
+      <p>{{'credits' | translate }} <a target="_blank" rel="noopener noreferrer" href="https://github.com/Vinicius-Fiorio">Vinicius
           Fiorio</a></p>
     </footer>
   </div>

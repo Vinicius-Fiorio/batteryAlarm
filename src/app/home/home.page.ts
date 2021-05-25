@@ -6,6 +6,7 @@ import { OptionsPage } from '../options/options.page';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 import { Plugins} from '@capacitor/core';
+import { TranslateService } from '@ngx-translate/core';
 
 const { LocalNotifications } = Plugins;
 
@@ -28,6 +29,7 @@ export class HomePage {
 
   constructor(public modalController: ModalController, 
     public batteryStatus: BatteryStatus, 
+    private translate: TranslateService
     ) {
 
     this.batteryStatus.onChange().subscribe((status) =>{
@@ -47,6 +49,9 @@ export class HomePage {
       document.body.setAttribute('color-theme','light')
 
     await LocalNotifications.requestPermission();
+
+    this.translate.setDefaultLang(this.options.language.substring(0,2));
+    this.translate.use(this.options.language.substring(0,2));
   }
 
   getData(){

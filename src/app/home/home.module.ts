@@ -7,6 +7,9 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -28,7 +31,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       titleFontSize: "50px",
       showUnits: false,
       responsive: true
-    })
+    }),
+    HttpClientModule,
+    TranslateModule
   ],
   declarations: [HomePage]
 })
