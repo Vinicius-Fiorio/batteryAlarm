@@ -34,14 +34,16 @@ export class MusicOptionsPage implements OnInit {
     this.songs.forEach(song => {
       if(songSelect == song && song[3] == false){
         song[3] = true;
+
         if(this.player != null)
           this.player.stop()
+
         this.player = new Howl({
           src: song[2].toString()
         })
+        
         this.player.play();
       }else if(songSelect == song && song[3] == true){
-        console.log("Som ja esta selecionado")
         this.player.pause()
       }else{
         song[3] = false;
@@ -55,8 +57,7 @@ export class MusicOptionsPage implements OnInit {
       this.player.pause()
     } 
     catch(error){
-      if(error.name == 'TypeError')
-        console.log('Não foi possivel pausar a música, pois nenhuma estava sendo reproduzida')
+      console.log(error.name , error.message)
     }
 
     for(let i=0; i<this.songs.length; i++){

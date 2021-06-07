@@ -9,6 +9,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HttpClientModule,
     TranslateModule
   ],
+  providers:[BackgroundMode],
   declarations: [HomePage]
 })
 export class HomePageModule {}

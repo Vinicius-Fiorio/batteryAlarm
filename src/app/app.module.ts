@@ -11,6 +11,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -37,7 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BatteryStatus, LocalNotifications],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BatteryStatus,BackgroundMode, LocalNotifications],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,11 +4,12 @@ import { ModalController } from '@ionic/angular';
 import { OptionsPage } from '../options/options.page';
 
 import { BatteryStatus } from '@ionic-native/battery-status/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 import { Plugins} from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 
-const { LocalNotifications } = Plugins;
+const { App, LocalNotifications, BackgroundTask  } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -26,27 +27,19 @@ export class HomePage {
   pathSound: string;
   options: any;
   disableButton: boolean;
+  texto: string
 
   constructor(public modalController: ModalController, 
     public batteryStatus: BatteryStatus, 
-    private translate: TranslateService
+    private translate: TranslateService,
+    private backgroundMode: BackgroundMode
     ) {
-
-    this.batteryStatus.onChange().subscribe((status) =>{
-      this.batterylevel = status.level;
-      this.batteryIsPlugged = status.isPlugged;
-
-      this.getData();
-      this.changeButton();
-    });
+    
+    document.body.setAttribute('color-theme', 'light');
   }
 
   async ngOnInit(){
     this.getData()
-    if(this.options.darkMode)
-      document.body.setAttribute('color-theme','dark')
-    else
-      document.body.setAttribute('color-theme','light')
 
     await LocalNotifications.requestPermission();
 
@@ -59,9 +52,15 @@ export class HomePage {
       this.options = JSON.parse(localStorage.getItem('options'));
       this.levelAlarm = this.options.batteryLevelAlarm;
       this.pathSound = this.options.ringtoneSong.path.replace('../../assets/','');
-      if(this.options.alarmMethod.enableMethod == 'Plug-in'){
+
+      if(this.options.alarmMethod.enableMethod == 'Plug-in')
         this.activeAlarm = true;
-      }
+
+      if(this.options.darkMode)
+        document.body.setAttribute('color-theme','dark')
+      else
+        document.body.setAttribute('color-theme','light')
+
     }else{
       this.pathSound = 'battery_full_capacity.mp3'; //sound default
       this.levelAlarm = 100;
@@ -70,7 +69,7 @@ export class HomePage {
 
   statusNotification(){
     if(this.options.alarmMethod.enableMethod == 'Manual' && this.activeAlarm == true){
-      if(this.batterylevel >= this.levelAlarm && this.batteryIsPlugged == true){
+      if((this.batterylevel >= this.levelAlarm) && this.batteryIsPlugged == true){
         this.scheduleNotification();
       }
 
@@ -85,9 +84,9 @@ export class HomePage {
   }
 
   ionViewDidEnter(){
-    const batterysubscription = this.batteryStatus.onChange().subscribe(status => {  
+    this.batteryStatus.onChange().subscribe(status => {  
       this.batterylevel = status.level;
-
+      this.batteryIsPlugged = status.isPlugged;
       this.changeButton();
       this.statusNotification();
     });
@@ -95,6 +94,7 @@ export class HomePage {
   }
 
   changeButton(){
+    //button turn on/off
     if(this.options.alarmMethod.enableMethod == 'Plug-in'){
       this.activeAlarm = true;
       this.disableButton = true;
@@ -140,13 +140,6 @@ export class HomePage {
   }
 
   async scheduleNotification(){
-
-    /*/delete channel notification
-    await LocalNotifications.deleteChannel({
-      id: 'channel',
-      name:'battery',
-      importance: 5
-    });*/
 
     this.getData();
 
@@ -198,4 +191,39 @@ export class HomePage {
     const peding = await LocalNotifications.getPending();
     LocalNotifications.cancel(peding);
   }
+
+  //Test Background
+  backgroundNotification(level:number){
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "Cancelamento do Alarme",
+          body: `Bateria atual: ${level}`,
+          id: 12,
+        }
+      ]
+    });
+  }
+  
+  a = App.addListener('appStateChange', state =>{
+    if (!state.isActive) {
+  
+      let taskId = BackgroundTask.beforeExit(() => {
+
+        this.backgroundNotification(this.batterylevel)
+        for(var i = 0; i < 1e18; i++) {
+          
+          this.backgroundNotification(this.batterylevel)
+
+          if(i == 10)
+            break;
+           
+        }
+        BackgroundTask.finish({
+          taskId,
+        });
+
+      });
+    }
+  })
 }

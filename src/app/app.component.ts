@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import {TranslateService} from '@ngx-translate/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,8 +10,11 @@ import {TranslateService} from '@ngx-translate/core';
 })
 
 export class AppComponent {
-  constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('pt');
-    this.translate.use('pt');
+  constructor(
+    private translate: TranslateService,
+  ) {
+
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
   }
 }

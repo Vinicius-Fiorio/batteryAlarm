@@ -39,7 +39,7 @@ export class OptionsPage{
     },
 
     darkMode: false,
-    language: 'English'
+    language: 'en - English'
   }
 
   constructor(public modalController: ModalController, 
@@ -50,13 +50,13 @@ export class OptionsPage{
     private translate: TranslateService
     ) {
 
-
+    document.body.setAttribute('color-theme', 'light');
     this.batteryStatus.onChange().subscribe((status) =>{
       this.battery = status.level;
       this.status = status.isPlugged;
     });
 
-    //initialize array percents
+    //level alarm array percents option 
     for(let x = 1; x<=100;x++){
       this.percents.push(x);
     };
@@ -73,13 +73,19 @@ export class OptionsPage{
       this.options = JSON.parse(localStorage.getItem('options'));
     }
 
+    if(this.options.darkMode == true){
+      document.body.setAttribute('color-theme', 'dark');
+    }else{
+      document.body.setAttribute('color-theme', 'light');
+    }
+
     this.translate.setDefaultLang(this.options.language.substring(0,2));
     this.translate.use(this.options.language.substring(0,2));
     this.translate.addLangs(['en', 'pt']);
     this.langs = this.translate.getLangs();
   }
 
-  //Date Time chooser
+  //How to Use page
   async presentModalDate() {
       const modal = await this.modalController.create({
         component: DateTimePage,
@@ -90,7 +96,7 @@ export class OptionsPage{
       await modal.present();
   }
 
-  //Ringtone Song
+  //Ringtone Song page
   async presentModalSong() {
     const modalzin = await this.modalController.create({
       component: MusicOptionsPage,
